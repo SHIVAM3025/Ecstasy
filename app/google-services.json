@@ -1,0 +1,448 @@
+{
+  "project_info": {
+    "project_number": "456277723625",
+    "firebase_url": "https://theatronfinal.firebaseio.com",
+    "project_id": "theatronfinal",
+    "storage_bucket": "theatronfinal.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:456277723625:android:a159092b74f5641dabe378",
+        "android_client_info": {
+          "package_name": "com.android.theatron"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "456277723625-2uv8tkrvqpmcd21tifkf6093fvii0dqm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.android.theatron",
+            "certificate_hash": "a74269409c21df629c3472365032881bfe958da6"
+          }
+        },
+        {
+          "client_id": "456277723625-epsqh39clcqu9duqc6m9bk78dli9ckqo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2J-zTzT6mz5sYaIceDp47p5ue-iNYuD8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "456277723625-epsqh39clcqu9duqc6m9bk78dli9ckqo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "456277723625-apntqlf95ntao554ecfnf97n8289fr0i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.theatron.theatron",
+                "app_store_id": "1507996105"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:456277723625:android:b715f0ed6244fbb0abe378",
+        "android_client_info": {
+          "package_name": "com.app.theatron"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "456277723625-s95rsg19hnhe8v3usg7ahk0ln2latmi4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.theatron",
+            "certificate_hash": "b39cd1e7da674e5e9cb2714b9206005ea3230228"
+          }
+        },
+        {
+          "client_id": "456277723625-epsqh39clcqu9duqc6m9bk78dli9ckqo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2J-zTzT6mz5sYaIceDp47p5ue-iNYuD8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "456277723625-epsqh39clcqu9duqc6m9bk78dli9ckqo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "456277723625-apntqlf95ntao554ecfnf97n8289fr0i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.theatron.theatron",
+                "app_store_id": "1507996105"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:456277723625:android:06f4dd54f9df8d10abe378",
+        "android_client_info": {
+          "package_name": "com.example.ecstasyandroidapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "456277723625-j7obu6mkd2thl0acsdl1668lrrin2m2c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ecstasyandroidapp",
+            "certificate_hash": "1bb67cdc1f12178957c78b9be939fee438f5b14e"
+          }
+        },
+        {
+          "client_id": "456277723625-epsqh39clcqu9duqc6m9bk78dli9ckqo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2J-zTzT6mz5sYaIceDp47p5ue-iNYuD8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "456277723625-epsqh39clcqu9duqc6m9bk78dli9ckqo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "456277723625-apntqlf95ntao554ecfnf97n8289fr0i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.theatron.theatron",
+                "app_store_id": "1507996105"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:456277723625:android:6e7ba2c87d8451efabe378",
+        "android_client_info": {
+          "package_name": "com.example.theatronandroid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "456277723625-h2a8l4dcom1nc7eo8he03camosmfqnit.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.theatronandroid",
+            "certificate_hash": "f0752773de43d462f1b8f1c3a24de128c136c68f"
+          }
+        },
+        {
+          "client_id": "456277723625-epsqh39clcqu9duqc6m9bk78dli9ckqo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2J-zTzT6mz5sYaIceDp47p5ue-iNYuD8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "456277723625-epsqh39clcqu9duqc6m9bk78dli9ckqo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "456277723625-apntqlf95ntao554ecfnf97n8289fr0i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.theatron.theatron",
+                "app_store_id": "1507996105"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:456277723625:android:56a33c601a15abb5abe378",
+        "android_client_info": {
+          "package_name": "com.theatron.ecstasy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "456277723625-fbn5jv9sftk1beu0ftjvisqqm92897te.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.theatron.ecstasy",
+            "certificate_hash": "7b01c0e86305298d79e883baceb0c4f694e97fb2"
+          }
+        },
+        {
+          "client_id": "456277723625-p20a9eg3j92dtvho7rioarc6gcis6vap.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.theatron.ecstasy",
+            "certificate_hash": "124317238e618942cfc0d9543fce76db49d48cd8"
+          }
+        },
+        {
+          "client_id": "456277723625-epsqh39clcqu9duqc6m9bk78dli9ckqo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2J-zTzT6mz5sYaIceDp47p5ue-iNYuD8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "456277723625-epsqh39clcqu9duqc6m9bk78dli9ckqo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "456277723625-apntqlf95ntao554ecfnf97n8289fr0i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.theatron.theatron",
+                "app_store_id": "1507996105"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:456277723625:android:e7f1c1e07f1c1707abe378",
+        "android_client_info": {
+          "package_name": "com.theatron.ecstasymain"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "456277723625-lpqoqk34jspbj2p6i8o4ul1upb70q90a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.theatron.ecstasymain",
+            "certificate_hash": "b0e5fe638e9bad5e44e8e80ded2637388dd095c1"
+          }
+        },
+        {
+          "client_id": "456277723625-epsqh39clcqu9duqc6m9bk78dli9ckqo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2J-zTzT6mz5sYaIceDp47p5ue-iNYuD8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "456277723625-epsqh39clcqu9duqc6m9bk78dli9ckqo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "456277723625-apntqlf95ntao554ecfnf97n8289fr0i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.theatron.theatron",
+                "app_store_id": "1507996105"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:456277723625:android:e6c98c1d5a2d776fabe378",
+        "android_client_info": {
+          "package_name": "com.theatron2.uiforthreaton"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "456277723625-qiud9nv35vegv0ngbs4f17ar0avgppf8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.theatron2.uiforthreaton",
+            "certificate_hash": "124317238e618942cfc0d9543fce76db49d48cd8"
+          }
+        },
+        {
+          "client_id": "456277723625-u8s0etqa60nvmmsd9ldjvi4sefkguf79.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.theatron2.uiforthreaton",
+            "certificate_hash": "1bb67cdc1f12178957c78b9be939fee438f5b14e"
+          }
+        },
+        {
+          "client_id": "456277723625-epsqh39clcqu9duqc6m9bk78dli9ckqo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2J-zTzT6mz5sYaIceDp47p5ue-iNYuD8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "456277723625-epsqh39clcqu9duqc6m9bk78dli9ckqo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "456277723625-apntqlf95ntao554ecfnf97n8289fr0i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.theatron.theatron",
+                "app_store_id": "1507996105"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:456277723625:android:6ab821f4532fb707abe378",
+        "android_client_info": {
+          "package_name": "com.theatron3.uiforthreaton"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "456277723625-07kq42v4kvikc92sir0rcfjv31pi0e0k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.theatron3.uiforthreaton",
+            "certificate_hash": "8bfa125608809b5221b16094abf0a73fc647e0b8"
+          }
+        },
+        {
+          "client_id": "456277723625-8ha1g4h3q6e68g02d3vgmfdgm7t8lf0o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.theatron3.uiforthreaton",
+            "certificate_hash": "afff61d62f4d3529ab9111f42aca5639f92868b2"
+          }
+        },
+        {
+          "client_id": "456277723625-efc9thtepvg98d5vc0p8s97srju7oj3l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.theatron3.uiforthreaton",
+            "certificate_hash": "124317238e618942cfc0d9543fce76db49d48cd8"
+          }
+        },
+        {
+          "client_id": "456277723625-n30nla2sb7u99jjapsuejaj0edr6drra.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.theatron3.uiforthreaton",
+            "certificate_hash": "89928f69d0811ccc706cc952d0e08eb6060d648c"
+          }
+        },
+        {
+          "client_id": "456277723625-epsqh39clcqu9duqc6m9bk78dli9ckqo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2J-zTzT6mz5sYaIceDp47p5ue-iNYuD8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "456277723625-epsqh39clcqu9duqc6m9bk78dli9ckqo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "456277723625-apntqlf95ntao554ecfnf97n8289fr0i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.theatron.theatron",
+                "app_store_id": "1507996105"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:456277723625:android:9484e87b4e610ed5abe378",
+        "android_client_info": {
+          "package_name": "in.ecstasy.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "456277723625-epsqh39clcqu9duqc6m9bk78dli9ckqo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2J-zTzT6mz5sYaIceDp47p5ue-iNYuD8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "456277723625-epsqh39clcqu9duqc6m9bk78dli9ckqo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "456277723625-apntqlf95ntao554ecfnf97n8289fr0i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.theatron.theatron",
+                "app_store_id": "1507996105"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

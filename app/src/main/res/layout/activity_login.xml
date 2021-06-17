@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="#7DD6FF"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/headerRl"
+        android:background="#7DD6FF"
+        android:layout_width="match_parent"
+        android:layout_height="300dp">
+
+        <ImageView
+            android:layout_centerInParent="true"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ecstasy" />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:onClick="handleLoginVideo"
+            android:padding="10dp"
+            android:src="@drawable/ic_play" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/headerRl"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/artist_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/login_background"
+            android:onClick="handleLogin"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:text="Join As An Artist"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/audience_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/login_background"
+            android:textColor="@color/white"
+            android:onClick="handleLogin"
+            android:padding="10dp"
+            android:text="Join As An Audience"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>
