@@ -1,10 +1,10 @@
 package in.ecstasy.app.Login;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import in.ecstasy.app.MainActivity;
 import in.ecstasy.app.R;
@@ -17,6 +17,7 @@ public class ChooseLoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_login);
+
     }
 
     public void handleLogin(View view) {

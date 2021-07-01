@@ -2,10 +2,18 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="in.ecstasy.app">
 
+    <uses-sdk
+        android:minSdkVersion="25"
+        android:targetSdkVersion="30" />
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the "MyLocation" functionality.
+    -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".Ecstasy"
@@ -17,8 +25,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Ecstasy"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Login.ChooseLoginActivity"/>
-        <activity android:name=".Login.LoginPreview" />
+        <activity android:name=".Profile.FriendRequestActivity"></activity>
+        <activity android:name=".Profile.EditProfileActivity" />
+        <activity android:name=".Profile.UploadVideoActivity" />
+        <activity android:name=".ExploreActivity" />
+        <activity android:name=".Login.ChooseLoginActivity" />
+        <activity android:name=".Login.ViewThemeVideoActivity" />
         <activity android:name=".Login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

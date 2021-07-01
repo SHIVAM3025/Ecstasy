@@ -1,30 +1,43 @@
 package in.ecstasy.app.Home;
 
+import android.app.Dialog;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.textfield.TextInputLayout;
+
+import java.util.Collections;
+import java.util.List;
+
+import in.ecstasy.app.ExploreActivity;
+import in.ecstasy.app.Objects.Video;
 import in.ecstasy.app.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link HomeFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class HomeFragment extends Fragment {
+import static in.ecstasy.app.MainActivity.currentUser;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+public class HomeFragment extends Fragment implements HomeRecyclerAdapter.OnPostClickListener{
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private static final String TAG = "HomeFragment";
+    private RecyclerView home_view_recylerView;
+    private HomeRecyclerAdapter recyclerAdapter;
+    private HomeViewModel homeViewModel;
+    private Context context;
+    String exploreUserId;
 
     public static HomeFragment newInstance(String exploreUserId) {
         HomeFragment homeFragment = new HomeFragment();
@@ -34,30 +47,12 @@ public class HomeFragment extends Fragment {
         return homeFragment;
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment HomeFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static HomeFragment newInstance(String param1, String param2) {
-        HomeFragment fragment = new HomeFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+        if(getArguments() != null){
+            exploreUserId = getArguments().getString("ExploreUserId");
         }
     }
 
@@ -67,4 +62,90 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        context = getContext();
+        home_view_recylerView = getView().findViewById(R.id.home_view_recylerView);
+        /*home_view_recylerView.setLayoutManager(new LinearLayoutManager());
+        home_view_recylerView.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);*/
+        recyclerAdapter = new HomeRecyclerAdapter(context,this);
+        home_view_recylerView.setAdapter(recyclerAdapter);
+        homeViewModel = new ViewModelProvider((ViewModelStoreOwner) context).get(HomeViewModel.class);
+        homeViewModel.getPosts(exploreUserId).observe((LifecycleOwner) context, new Observer<List<Video>>() {
+            @Override
+            public void onChanged(List<Video> videoList) {
+                Collections.shuffle(videoList);
+                recyclerAdapter.updatePostList(videoList);
+            }
+        });
+    }
+
+    public void handleNameClick(String id) {
+        if(id == currentUser.getId()) return;
+        Intent intent = new Intent(context, ExploreActivity.class);
+        intent.putExtra("userId", id);
+        //intent.putExtra("currentUser", currentUser);
+        startActivity(intent);
+    }
+
+
+    @Override
+    public void OnArtistNameClick(int position) {
+        handleNameClick(recyclerAdapter.postList.get(position).getId());
+    }
+
+    @Override
+    public void OnShareClick(int position) {
+        showCaptionUploadDialog(position);
+    }
+
+    private void showCaptionUploadDialog(int position) {
+        Dialog dialog = new Dialog(getContext());
+        dialog.setCancelable(true);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.caption_dialog_layout);
+        TextInputLayout inputLayout = dialog.findViewById(R.id.caption_editText_view);
+        Button uploadBtn = dialog.findViewById(R.id.caption_upload_btn);
+        uploadBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(inputLayout.getEditText().getText().toString().trim().equals("")){
+                    Toast.makeText(getContext(), "Type Something", Toast.LENGTH_SHORT).show();
+                }else{
+                    recyclerAdapter.shareVideo(position, inputLayout.getEditText().getText().toString().trim());
+                    dialog.dismiss();
+                }
+            }
+        });
+        dialog.show();
+    }
+
+    @Override
+    public void OnLikeClick(int position) {
+        int status = recyclerAdapter.postList.get(position).getVideoStatus();
+        //Toast.makeText(getContext(), "Like Clicked " + status, Toast.LENGTH_SHORT).show();
+        if(status == 0){
+            recyclerAdapter.likeVideo(position);
+        }else if(status == 2){
+            recyclerAdapter.flipToLike(position);
+        } else {
+            recyclerAdapter.removeLikeFromVideo(position);
+        }
+    }
+
+    @Override
+    public void OnDislikeClick(int position) {
+        int status = recyclerAdapter.postList.get(position).getVideoStatus();
+        //Toast.makeText(getContext(), "Dislike Clicked " + status, Toast.LENGTH_SHORT).show();
+        if(status == 0){
+            recyclerAdapter.dislikeVideo(position);
+        }else if(status == 1){
+            recyclerAdapter.flipToDislike(position);
+        }else{
+            recyclerAdapter.removeDislikeFromVideo(position);
+        }
+    }
+
 }

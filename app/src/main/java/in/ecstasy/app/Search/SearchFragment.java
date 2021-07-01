@@ -1,61 +1,40 @@
 package in.ecstasy.app.Search;
 
+import android.app.Dialog;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.ImageView;
+import android.widget.SearchView;
+import android.widget.TextView;
+import android.widget.VideoView;
 
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+
+import in.ecstasy.app.ExploreActivity;
+import in.ecstasy.app.Objects.Video;
 import in.ecstasy.app.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link SearchFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class SearchFragment extends Fragment {
+import static in.ecstasy.app.MainActivity.currentUser;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+public class SearchFragment extends Fragment implements SearchView.OnQueryTextListener, SearchVideoRecyclerAdapter.OnVideoClickListener {
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public SearchFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SearchFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static SearchFragment newInstance(String param1, String param2) {
-        SearchFragment fragment = new SearchFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    private static final String TAG = "Search";
+    SearchVideoViewModel searchVideoViewModel;
+    SearchView searchView;
+    Context context;
+    private SearchVideoRecyclerAdapter searchVideoRecyclerAdapter;
+    private RecyclerView recyclerView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,4 +42,69 @@ public class SearchFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_search, container, false);
     }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        context = getContext();
+        recyclerView = getView().findViewById(R.id.search_recycler_view);
+        searchView = getView().findViewById(R.id.search_input);
+        searchView.setOnQueryTextListener(this);
+        searchView.setQuery("", false);
+        showVideos();
+    }
+
+
+    private void showVideos() {
+        int numberOfColumns = 2;
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), numberOfColumns));
+        searchVideoRecyclerAdapter = new SearchVideoRecyclerAdapter(getContext(), this);
+        recyclerView.setAdapter(searchVideoRecyclerAdapter);
+        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+
+        if (!s.equals("")) {
+            //searchVideoRecyclerAdapter.getFilter().filter(s);
+            searchVideoRecyclerAdapter.searchVideos(s);
+        }
+        return false;
+    }
+
+    @Override
+    public void OnImageClick(int position) {
+        Video video = searchVideoRecyclerAdapter.filteredVideoList.get(position);
+        Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.video_dialog_layout);
+        ImageView artistImage = dialog.findViewById(R.id.dialog_artist_photo_view);
+        TextView artistName = dialog.findViewById(R.id.dialog_artist_name_view);
+        TextView videoTitle = dialog.findViewById(R.id.dialog_videoTitle);
+        VideoView videoView = dialog.findViewById(R.id.dialog_videoView);
+        Glide.with(context).load(video.getPhoto()).into(artistImage);
+        videoView.setVideoPath(video.getUrl());
+        videoView.start();
+        artistName.setText(video.getName());
+        videoTitle.setText(video.getTitle());
+        artistName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (video.getId() == currentUser.getId()) return;
+                Intent intent = new Intent(context, ExploreActivity.class);
+                intent.putExtra("userId", video.getId());
+                startActivity(intent);
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
+
+
 }

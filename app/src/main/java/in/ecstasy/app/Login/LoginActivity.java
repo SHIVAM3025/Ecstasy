@@ -1,8 +1,5 @@
 package in.ecstasy.app.Login;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,9 +7,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -24,6 +23,7 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import java.util.Arrays;
 import java.util.List;
 
+import in.ecstasy.app.MainActivity;
 import in.ecstasy.app.R;
 import in.ecstasy.app.Retrofit.ApiClient;
 import in.ecstasy.app.Retrofit.ApiInterface;
@@ -49,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void handleLogin(View view) {
-        switch(view.getId()){
+        switch (view.getId()) {
             case R.id.artist_login:
                 USER_TYPE = "Artist";
                 //artist login
@@ -60,23 +60,37 @@ public class LoginActivity extends AppCompatActivity {
                 break;
         }
 
-
-        Intent intent = new Intent(LoginActivity.this , ChooseLoginActivity.class);
+/*
+        Intent intent = new Intent(LoginActivity.this, ChooseLoginActivity.class);
         startActivity(intent);
-        finish();
+        finish();*/
 
 
-  /*      List<AuthUI.IdpConfig> providers = Arrays.asList(
+        List<AuthUI.IdpConfig> providers = Arrays.asList(
                 //new AuthUI.IdpConfig.EmailBuilder().build(),
                 new AuthUI.IdpConfig.GoogleBuilder().build(),
-                new AuthUI.IdpConfig.FacebookBuilder().build());
+                new AuthUI.IdpConfig.FacebookBuilder().build(),
+                new AuthUI.IdpConfig.AppleBuilder().build()
+        );
 
         startActivityForResult(AuthUI.getInstance()
                 .createSignInIntentBuilder()
                 .setAvailableProviders(providers)
                 //set logo and privacy policy
                 .setTheme(R.style.Theme_Ecstasy)
-                .build(), RC_SIGN_IN);*/
+                .build(), RC_SIGN_IN);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        String idToken = getSharedPreferences("Ecstasy", MODE_PRIVATE).getString("ID_TOKEN", null);
+        if (idToken != null) {
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            finish();
+        }
+
     }
 
     @Override
@@ -90,8 +104,9 @@ public class LoginActivity extends AppCompatActivity {
                 // Successfully signed in
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 Log.d(TAG, "Logged In Successfully ");
-                startActivity(new Intent(LoginActivity.this, LoginPreview.class));
+                startActivity(new Intent(LoginActivity.this, ViewThemeVideoActivity.class));
                 subscribeUserToFirebaseMessaging();
+                assert user != null;
                 user.getIdToken(true).addOnSuccessListener(new OnSuccessListener<GetTokenResult>() {
                     @Override
                     public void onSuccess(GetTokenResult getTokenResult) {
@@ -109,7 +124,7 @@ public class LoginActivity extends AppCompatActivity {
                 });
             } else {
                 if(response!= null){
-                    Log.e(TAG, "LoginError: "+response.getError().getErrorCode() );
+                    Log.e(TAG, "LoginError: " + response.getError().toString());
                     Toast.makeText(this, "Error Logging In", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -148,7 +163,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void handleLoginVideo(View view) {
-        startActivity(new Intent(LoginActivity.this, LoginPreview.class));
+        startActivity(new Intent(LoginActivity.this, ViewThemeVideoActivity.class));
     }
 
 }

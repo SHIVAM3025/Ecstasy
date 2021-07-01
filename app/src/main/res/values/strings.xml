@@ -2,4 +2,7 @@
     <string name="app_name">Ecstasy</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="facebook_application_id" translatable="false">350792782922459</string>
+    <string name="facebook_login_protocol_scheme" translatable="false">fb350792782922459</string>
+    <string name="title_activity_delete">Map</string>
 </resources>

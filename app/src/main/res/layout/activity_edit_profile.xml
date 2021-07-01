@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Profile.EditProfileActivity"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:boxStrokeWidthFocused="2dp"
+        android:hint="Name"
+        app:startIconDrawable="@drawable/ic_profile"
+        app:startIconTint="@color/black"
+        app:boxStrokeWidth="1dp"
+        android:layout_margin="10dp"
+        android:id="@+id/profile_editName_view">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:boxStrokeWidthFocused="2dp"
+        android:hint="Username"
+        app:startIconDrawable="@drawable/ic_username"
+        app:startIconTint="@color/black"
+        app:boxStrokeWidth="1dp"
+        android:layout_margin="10dp"
+        android:id="@+id/profile_editUserName_view">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:boxStrokeWidthFocused="2dp"
+        android:hint="About"
+        app:startIconDrawable="@drawable/ic_info"
+        app:startIconTint="@color/black"
+        app:boxStrokeWidth="1dp"
+        android:layout_margin="10dp"
+        android:id="@+id/profile_editBio_view">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:boxStrokeWidthFocused="2dp"
+        android:hint="Phone Number"
+        app:startIconDrawable="@drawable/ic_phone"
+        app:startIconTint="@color/black"
+        app:boxStrokeWidth="1dp"
+        android:layout_margin="10dp"
+        android:id="@+id/profile_editPhone_view">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:boxStrokeWidthFocused="2dp"
+        android:hint="Website"
+        android:visibility="gone"
+        app:startIconDrawable="@drawable/ic_web"
+        app:startIconTint="@color/black"
+        app:boxStrokeWidth="1dp"
+        android:layout_margin="10dp"
+        android:id="@+id/profile_editWeb_view">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_profile_btn"
+        android:background="@color/design_default_color_primary"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/white"
+        android:text="Apply"
+        android:onClick="handleEditProfile"/>
+
+</LinearLayout>

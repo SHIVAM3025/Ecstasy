@@ -31,6 +31,27 @@ public class User {
         this.isChecked = false;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", phonenumber='" + phonenumber + '\'' +
+                ", admirerscount='" + admirerscount + '\'' +
+                ", followerscount='" + followerscount + '\'' +
+                ", photourl='" + photourl + '\'' +
+                ", sharescount='" + sharescount + '\'' +
+                ", type='" + type + '\'' +
+                ", username='" + username + '\'' +
+                ", id='" + id + '\'' +
+                ", bio='" + bio + '\'' +
+                ", web='" + web + '\'' +
+                ", friends=" + friends +
+                ", sharedvideos=" + sharedvideos +
+                ", admiring=" + admiring +
+                ", isChecked=" + isChecked +
+                '}';
+    }
+
     public String getName() {
         return name;
     }

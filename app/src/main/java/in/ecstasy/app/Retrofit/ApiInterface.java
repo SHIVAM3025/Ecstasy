@@ -1,12 +1,11 @@
 package in.ecstasy.app.Retrofit;
 
-import java.io.File;
 import java.util.List;
 
-import in.ecstasy.app.Objects.User;
 import in.ecstasy.app.Objects.Comment;
+import in.ecstasy.app.Objects.Notification;
+import in.ecstasy.app.Objects.User;
 import in.ecstasy.app.Objects.Video;
-
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -59,6 +58,9 @@ public interface ApiInterface {
 
     @POST("profile/all-video")
     Call<List<Video>> getAllVideos(@Header("Authorization") String idToken);
+
+    @POST("/profile/notifications")
+    Call<List<Notification>> getAllNotifications(@Header("Authorization") String idToken);
 
     @POST("profile/thumbnail")
     Call<List<Video>> getTimelineVideos(@Header("Authorization") String idToken);

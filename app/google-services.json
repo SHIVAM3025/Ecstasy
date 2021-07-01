@@ -203,6 +203,14 @@
           }
         },
         {
+          "client_id": "456277723625-i342ksisl6gvlu3lvaksbo4ahb2thikd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.theatron.ecstasy",
+            "certificate_hash": "8296bd2b12d0dbff77da6d81f9a1235cd789702b"
+          }
+        },
+        {
           "client_id": "456277723625-p20a9eg3j92dtvho7rioarc6gcis6vap.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -414,6 +422,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "456277723625-ih1vhtlrosh35tt1b0q4j6ur1o395vvq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "in.ecstasy.app",
+            "certificate_hash": "8296bd2b12d0dbff77da6d81f9a1235cd789702b"
+          }
+        },
         {
           "client_id": "456277723625-epsqh39clcqu9duqc6m9bk78dli9ckqo.apps.googleusercontent.com",
           "client_type": 3

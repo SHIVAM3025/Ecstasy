@@ -1,9 +1,5 @@
 package in.ecstasy.app;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -14,6 +10,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -34,11 +35,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener ,  FirebaseAuth.AuthStateListener{
+public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener
+        , FirebaseAuth.AuthStateListener {
 
     private static final String TAG = "MainActivity";
-    public static String ID_TOKEN ;
-    public static User currentUser ;
+    public static String ID_TOKEN;
+    public static User currentUser;
     ApiInterface apiInterface;
     ProgressDialog progressDialog;
     Handler handler;
@@ -51,11 +53,13 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         setContentView(R.layout.activity_main);
 
         ID_TOKEN = getSharedPreferences("Ecstasy", MODE_PRIVATE).getString("ID_TOKEN", null);
+        Log.e("TAG", ID_TOKEN);
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
         progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(false);
         progressDialog.setMessage("Loading..");
         progressDialog.show();
+        progressDialog.dismiss();
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         refreshIdToken();
@@ -138,6 +142,13 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     @Override
     protected void onStart() {
         super.onStart();
+
+        String idToken = getSharedPreferences("Ecstasy", MODE_PRIVATE).getString("ID_TOKEN", null);
+      /*  if (idToken != null) {
+            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            finish();
+            return;
+        }*/
         FirebaseAuth.getInstance().addAuthStateListener(this);
         getCurrentUserProfile();
     }
@@ -148,6 +159,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 Log.d(TAG, "GetUserProfileInfo: " + response.body());
+                Toast.makeText(MainActivity.this, response.body().toString(), Toast.LENGTH_SHORT).show();
                 if(response.isSuccessful()){
                     currentUser = response.body();
                     if(progressDialog.isShowing()) {
@@ -180,7 +192,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         super.onDestroy();
         handler.removeCallbacks(getIdToken);
     }
-
 
     @Override
     public void onAuthStateChanged(@NonNull  FirebaseAuth firebaseAuth) {
