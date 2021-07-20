@@ -25,18 +25,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Ecstasy"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Profile.FriendRequestActivity"></activity>
+        <activity android:name=".SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Profile.FriendRequestActivity" />
         <activity android:name=".Profile.EditProfileActivity" />
         <activity android:name=".Profile.UploadVideoActivity" />
         <activity android:name=".ExploreActivity" />
         <activity android:name=".Login.ChooseLoginActivity" />
         <activity android:name=".Login.ViewThemeVideoActivity" />
         <activity android:name=".Login.LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
     </application>

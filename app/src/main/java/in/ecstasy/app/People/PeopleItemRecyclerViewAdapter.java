@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -67,6 +68,7 @@ public class PeopleItemRecyclerViewAdapter extends RecyclerView.Adapter<PeopleIt
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
+       // Toast.makeText(context,"URL " + peopleList.get(position).getPhotourl(), Toast.LENGTH_SHORT).show();
         Glide.with(context).load(peopleList.get(position).getPhotourl()).into(holder.personPhoto);
         holder.personName.setText(peopleList.get(position).getName());
         if(currentUser.getFriends() != null) {

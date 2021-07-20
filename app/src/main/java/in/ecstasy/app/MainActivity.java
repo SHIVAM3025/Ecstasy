@@ -47,23 +47,23 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     private final int REFRESH_TOKEN_DELAY = 1800000;
     private final int REQUEST_READ_CONTACTS = 768;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        ID_TOKEN = getSharedPreferences("Ecstasy", MODE_PRIVATE).getString("ID_TOKEN", null);
-        Log.e("TAG", ID_TOKEN);
-        apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setCancelable(false);
-        progressDialog.setMessage("Loading..");
-        progressDialog.show();
-        progressDialog.dismiss();
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setOnNavigationItemSelectedListener(this);
-        refreshIdToken();
-    }
+    private final Runnable getIdToken = new Runnable() {
+        @Override
+        public void run() {
+            FirebaseAuth.getInstance().getCurrentUser().getIdToken(true)
+                    .addOnSuccessListener(new OnSuccessListener<GetTokenResult>() {
+                        @Override
+                        public void onSuccess(GetTokenResult getTokenResult) {
+                            ID_TOKEN = getTokenResult.getToken();
+                            Toast.makeText(MainActivity.this, ID_TOKEN, Toast.LENGTH_SHORT).show();
+                            SharedPreferences.Editor editor = getSharedPreferences("Ecstasy", MODE_PRIVATE).edit();
+                            editor.putString("ID_TOKEN", getTokenResult.getToken());
+                            editor.apply();
+                        }
+                    });
+            handler.postDelayed(getIdToken,REFRESH_TOKEN_DELAY);
+        }
+    };
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -110,22 +110,23 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         handler.postDelayed(getIdToken, REFRESH_TOKEN_DELAY);
     }
 
-    private final Runnable getIdToken = new Runnable() {
-        @Override
-        public void run() {
-            FirebaseAuth.getInstance().getCurrentUser().getIdToken(true)
-                    .addOnSuccessListener(new OnSuccessListener<GetTokenResult>() {
-                        @Override
-                        public void onSuccess(GetTokenResult getTokenResult) {
-                            ID_TOKEN = getTokenResult.getToken();
-                            SharedPreferences.Editor editor = getSharedPreferences("Ecstasy", MODE_PRIVATE).edit();
-                            editor.putString("ID_TOKEN", getTokenResult.getToken());
-                            editor.apply();
-                        }
-                    });
-            handler.postDelayed(getIdToken,REFRESH_TOKEN_DELAY);
-        }
-    };
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        ID_TOKEN = getSharedPreferences("Ecstasy", MODE_PRIVATE).getString("ID_TOKEN", null);
+
+        apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setCancelable(false);
+        progressDialog.setMessage("Loading..");
+        progressDialog.show();
+        progressDialog.dismiss();
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(this);
+        //refreshIdToken();
+    }
 
 
     @Override
@@ -142,19 +143,13 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     @Override
     protected void onStart() {
         super.onStart();
-
-        String idToken = getSharedPreferences("Ecstasy", MODE_PRIVATE).getString("ID_TOKEN", null);
-      /*  if (idToken != null) {
-            startActivity(new Intent(MainActivity.this, LoginActivity.class));
-            finish();
-            return;
-        }*/
         FirebaseAuth.getInstance().addAuthStateListener(this);
         getCurrentUserProfile();
     }
 
     private void getCurrentUserProfile() {
         Call<User> call = apiInterface.getCurrentUserProfile(ID_TOKEN);
+        Log.e("TAG_2" , ID_TOKEN);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {

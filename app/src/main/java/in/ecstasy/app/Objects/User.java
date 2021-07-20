@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import java.util.Map;
 
 public class User {
+
     String name, phonenumber, admirerscount, followerscount,
             photourl, sharescount, type, username, id, bio, web;
     Map<String, Friend> friends;

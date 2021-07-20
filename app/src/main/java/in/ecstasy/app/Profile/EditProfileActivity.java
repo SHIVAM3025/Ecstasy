@@ -42,7 +42,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
     private void getCurrentUser() {
         String idToken = getSharedPreferences("Ecstasy", MODE_PRIVATE).getString("ID_TOKEN",null);
-        Call<User> call = apiInterface.getCurrentUserProfile(idToken);
+        /*Call<User> call = apiInterface.getCurrentUserProfile(idToken);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
@@ -61,7 +61,7 @@ public class EditProfileActivity extends AppCompatActivity {
             public void onFailure(Call<User> call, Throwable t) {
                 Log.d(TAG, "CurrentUserProfileRequest: " + t.getLocalizedMessage());
             }
-        });
+        });*/
     }
 
     public void handleEditProfile(View view) {

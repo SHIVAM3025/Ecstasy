@@ -11,13 +11,22 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.abedelazizshe.lightcompressorlibrary.CompressionListener;
 import com.abedelazizshe.lightcompressorlibrary.VideoCompressor;
 import com.abedelazizshe.lightcompressorlibrary.VideoQuality;
 import com.abedelazizshe.lightcompressorlibrary.config.Configuration;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
@@ -37,6 +46,7 @@ public class UploadVideoActivity extends AppCompatActivity {
     TextInputLayout postTitle, description;
     Button uploadBtn;
     Uri videoUri;
+    String uid;
     VideoView videoView;
     ProgressBar progressBar;
     MediaController mediaController;
@@ -55,6 +65,7 @@ public class UploadVideoActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.upload_progress_bar);
         uploadBtn = findViewById(R.id.video_upload_btn);
         videoUri = (Uri) getIntent().getExtras().get("VideoPath");
+        uid = (String) getIntent().getExtras().get("uid");
         mediaController = new MediaController(this);
         mediaController.setAnchorView(videoView);
         compressVideo();
@@ -130,16 +141,73 @@ public class UploadVideoActivity extends AppCompatActivity {
         }
         Toast.makeText(this, "Uploading..", Toast.LENGTH_SHORT).show();
         String idToken = getSharedPreferences("Ecstasy", MODE_PRIVATE).getString("ID_TOKEN", null);
-        RequestBody requestBody = RequestBody.create(MediaType.parse("video/*"), file);
-        MultipartBody.Part fileToUpload = MultipartBody.Part.createFormData("file", file.getName(), requestBody);
-        RequestBody title = RequestBody.create(okhttp3.MultipartBody.FORM, postTitle.getEditText().getText().toString().trim());
-        RequestBody desc = RequestBody.create(okhttp3.MultipartBody.FORM, description.getEditText().getText().toString().trim());
+        RequestBody requestBody = RequestBody.create(MediaType.parse("video/mp4"), file);
 
-        Call<okhttp3.ResponseBody> call = apiInterface.uploadVideo(idToken , fileToUpload , title , desc);
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("Videos").child(uid).child(System.currentTimeMillis() + " " + ".mp4");
+        UploadTask uploadTask = storageReference.putFile(Uri.fromFile(file));
+
+        uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+            @Override
+            public Task<Uri> then(@NonNull @NotNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                    if(!task.isSuccessful()){
+                        throw task.getException();
+                    }
+
+                    return storageReference.getDownloadUrl();
+            }
+        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull @NotNull Task<Uri> task) {
+                if(task.isSuccessful()){
+                    Uri downloadUrl = task.getResult() ;
+                    uploadVideo(idToken,downloadUrl.toString());
+                   // finish();
+
+                }
+            }
+        });
+
+
+      /*  MultipartBody.Part fileToUpload = MultipartBody.Part.createFormData("file", file.getName(), requestBody);
+        RequestBody title = RequestBody.create(MediaType.parse("text/plain"), postTitle.getEditText().getText().toString().trim());
+        RequestBody desc = RequestBody.create(MediaType.parse("text/plain"), description.getEditText().getText().toString().trim());*/
+/*
+        Call<okhttp3.ResponseBody> call = apiInterface.uploadVideo(idToken , requestBody , title , desc);
 
         call.enqueue(new retrofit2.Callback<okhttp3.ResponseBody>() {
             @Override
             public void onResponse(Call<okhttp3.ResponseBody> call, Response<okhttp3.ResponseBody> response) {
+                try {
+                    Log.d(TAG, "VideoUpload: " + response.body().string());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                Toast.makeText(UploadVideoActivity.this, "Video Uploaded Successfully", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+
+            @Override
+            public void onFailure(Call<okhttp3.ResponseBody> call, Throwable t) {
+                Log.e(TAG, "VideoUploadRequest: " + t.getLocalizedMessage());
+                Toast.makeText(UploadVideoActivity.this, "Video Upload Failed", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        });*/
+
+
+
+
+    }
+
+
+    public void uploadVideo( String idToken, String url){
+                Call<okhttp3.ResponseBody> call = apiInterface.uploadVideo(idToken , url , postTitle.getEditText().getText().toString()
+                , description.getEditText().getText().toString());
+
+        call.enqueue(new retrofit2.Callback<okhttp3.ResponseBody>() {
+            @Override
+            public void onResponse(Call<okhttp3.ResponseBody> call, Response<okhttp3.ResponseBody> response) {
+
                 try {
                     Log.d(TAG, "VideoUpload: " + response.body().string());
                 } catch (IOException e) {

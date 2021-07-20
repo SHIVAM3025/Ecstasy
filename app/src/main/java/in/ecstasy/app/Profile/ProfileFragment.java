@@ -3,6 +3,7 @@ package in.ecstasy.app.Profile;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.media.MediaMetadataRetriever;
 import android.net.Uri;
@@ -42,6 +43,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static android.app.Activity.RESULT_OK;
+import static android.content.Context.MODE_PRIVATE;
 import static in.ecstasy.app.MainActivity.ID_TOKEN;
 import static in.ecstasy.app.MainActivity.currentUser;
 
@@ -110,9 +112,9 @@ public class ProfileFragment extends Fragment implements ProfileRecyclerAdapter.
         username.setText("@"+currentUser.getUsername());
         shares.setText(currentUser.getSharescount());
         admiring.setText(currentUser.getAdmirerscount());
-     /*   if(currentUser.getAdmiring() != null) {
+        if(currentUser.getAdmiring() != null) {
             admiring.setText(String.valueOf(currentUser.getAdmiring().size()));
-        }*/
+        }
 
         updateVideoList();
 
@@ -169,6 +171,7 @@ public class ProfileFragment extends Fragment implements ProfileRecyclerAdapter.
                 if(!checkVideoDuration(selectedVideoUri)) return;
                 Intent intent = new Intent(context, UploadVideoActivity.class);
                 intent.putExtra("VideoPath", selectedVideoUri);
+                intent.putExtra("uid", currentUser.getId());
                 startActivity(intent);
             }
         }
@@ -236,6 +239,9 @@ public class ProfileFragment extends Fragment implements ProfileRecyclerAdapter.
             public void onClick(View view) {
                 FirebaseMessaging.getInstance().unsubscribeFromTopic(ID_TOKEN);
                 FirebaseAuth.getInstance().signOut();
+                SharedPreferences.Editor editor = context.getSharedPreferences("Ecstasy", MODE_PRIVATE).edit();
+                editor.putString("ID_TOKEN", null);
+                editor.apply();
                 bottomSheetDialog.dismiss();
             }
         });
@@ -247,9 +253,8 @@ public class ProfileFragment extends Fragment implements ProfileRecyclerAdapter.
             @Override
             public void onResponse(Call<List<Video>> call, Response<List<Video>> response) {
                 if(response.isSuccessful()) {
-                    Toast.makeText(getContext(), response.toString(), Toast.LENGTH_SHORT).show();
                     Log.d(TAG, "UserSpecificVideos: " + response.body());
-                  //  recyclerAdapter.updateVideoList(response.body());
+                    recyclerAdapter.updateVideoList(response.body());
                 }
             }
 

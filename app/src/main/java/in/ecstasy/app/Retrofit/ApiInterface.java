@@ -1,5 +1,8 @@
 package in.ecstasy.app.Retrofit;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
 import java.util.List;
 
 import in.ecstasy.app.Objects.Comment;
@@ -10,7 +13,10 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
@@ -43,7 +49,8 @@ public interface ApiInterface {
     Call<Object> denyFriendRequest(@Header("Authorization") String idToken, @Header("friend") String friendId);
 
     @POST("profile/can-be-friends")
-    Call<List<User>> possibleFriends(@Header("Authorization") String idToken, @Header("phonenumbers") String phoneNumbers);
+  Call<List<User>> possibleFriends(@Header("Authorization") String idToken, @Body JsonObject phoneNumbers);
+   // Call<String> possibleFriends(/*@Header("Authorization") String idToken,*/ @Header("phonenumbers") String phoneNumbers);
 
     @POST("profile/edit")
     Call<Object> editProfile(@Header("Authorization") String idToken, @Header("") String name,
@@ -126,10 +133,17 @@ public interface ApiInterface {
     @POST("profile/reply-to-comment")
     Call<Object> replyToComment(@Header("Authorization") String idToken, @Header("video_owner") String id, @Header("video_number") String vnum, @Header("comment_identifier") String commentId, @Header("caption") String caption);
 
-    @Multipart
+
+  /*  @POST("profile/upload")
+    @FormUrlEncoded
+    //Call<ResponseBody> uploadVideo(@Header("Authorization") String idToken, @Part MultipartBody.Part file, @Part("title") RequestBody title, @Part("desc") RequestBody desc);
+    Call<ResponseBody> uploadVideo(@Header("Authorization") String idToken, @Part("file") RequestBody file, @Part("title") RequestBody title, @Part("desc") RequestBody desc);
+*/
+
     @POST("profile/upload")
-    Call<ResponseBody> uploadVideo(@Header("Authorization") String idToken, @Part MultipartBody.Part file, @Part("title") RequestBody title, @Part("desc") RequestBody desc);
-
-
+    Call<ResponseBody> uploadVideo(@Header("Authorization") String idToken,
+                                   @Header("videourl") String videourl,
+                                   @Header("desc") String desc ,
+                                   @Header("title") String title);
 
 }

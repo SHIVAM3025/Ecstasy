@@ -8,10 +8,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 import java.util.List;
 
@@ -19,6 +23,7 @@ import in.ecstasy.app.Objects.User;
 import in.ecstasy.app.R;
 import in.ecstasy.app.Retrofit.ApiClient;
 import in.ecstasy.app.Retrofit.ApiInterface;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -106,15 +111,35 @@ public class PeopleFragment extends Fragment implements PeopleItemRecyclerViewAd
 
     private void getPossibleFriends(String phoneNumbers) {
         String idToken = getActivity().getSharedPreferences("Ecstasy", MODE_PRIVATE).getString("ID_TOKEN", null);
-        Log.e("ID_TOKEN" , idToken);
-        Call<List<User>> call = apiInterface.possibleFriends(idToken, phoneNumbers);
+        String testing = phoneNumbers;
+
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("phonenumbers" , testing);
+
+        apiInterface.possibleFriends(idToken ,jsonObject).enqueue(new Callback<List<User>>() {
+            @Override
+            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+                Log.d(TAG , response.toString());
+                if(response.isSuccessful()){
+                    getSentFriendRequests(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<User>> call, Throwable t) {
+                Log.d(TAG , "Error: " + t.toString());
+            }
+        });
+
+    /*
+        Call<List<User>> call = apiInterface.possibleFriends(phoneNumbers);
 
         call.enqueue(new Callback<List<User>>() {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
                 Log.d(TAG, "PossibleFriends: "+ response.body());
                 if(response.isSuccessful()) {
-                    getSentFriendRequests(response.body());
+                    //getSentFriendRequests(response.body());
                 }
             }
 
@@ -122,17 +147,21 @@ public class PeopleFragment extends Fragment implements PeopleItemRecyclerViewAd
             public void onFailure(Call<List<User>> call, Throwable t) {
                 Log.d(TAG, "PossibleFriendsRequest: " + t.getLocalizedMessage());
             }
-        });
+        });*/
     }
 
 
     @Override
     public void onNameClick(int position) {
 
+
+
     }
 
     @Override
     public void onSwitchClick(int position) {
+
+        
 
     }
 }
