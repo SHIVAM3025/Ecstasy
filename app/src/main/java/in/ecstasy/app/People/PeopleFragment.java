@@ -14,7 +14,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import java.util.List;
@@ -23,7 +22,6 @@ import in.ecstasy.app.Objects.User;
 import in.ecstasy.app.R;
 import in.ecstasy.app.Retrofit.ApiClient;
 import in.ecstasy.app.Retrofit.ApiInterface;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -159,9 +157,11 @@ public class PeopleFragment extends Fragment implements PeopleItemRecyclerViewAd
     }
 
     @Override
-    public void onSwitchClick(int position) {
-
-        
-
+    public void onSwitchClick(int position, Boolean b , String uid) {
+        if (b) {
+            Toast.makeText(context, uid, Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(context, uid, Toast.LENGTH_SHORT).show();
+        }
     }
 }

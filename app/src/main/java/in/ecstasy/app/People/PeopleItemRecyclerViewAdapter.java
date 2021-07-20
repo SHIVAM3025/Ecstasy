@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -92,7 +93,7 @@ public class PeopleItemRecyclerViewAdapter extends RecyclerView.Adapter<PeopleIt
         return peopleList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
         SwitchMaterial friendStatus;
         TextView personName;
@@ -103,7 +104,7 @@ public class PeopleItemRecyclerViewAdapter extends RecyclerView.Adapter<PeopleIt
             friendStatus = view.findViewById(R.id.people_friend_switch);
             personPhoto = view.findViewById(R.id.people_photo_view);
             personName.setOnClickListener(this);
-            friendStatus.setOnClickListener(this);
+            friendStatus.setOnCheckedChangeListener(this);
         }
 
         @Override
@@ -112,15 +113,18 @@ public class PeopleItemRecyclerViewAdapter extends RecyclerView.Adapter<PeopleIt
                 case R.id.people_name:
                     onPeopleClick.onNameClick(getAdapterPosition());
                     break;
-                case R.id.people_friend_switch:
-                    onPeopleClick.onSwitchClick(getAdapterPosition());
             }
+        }
+
+        @Override
+        public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+            onPeopleClick.onSwitchClick(getAdapterPosition() , b , peopleList.get(getAdapterPosition()).getId());
         }
     }
 
     public interface OnPeopleClick {
         void onNameClick(int position);
-        void onSwitchClick(int position);
+        void onSwitchClick(int position , Boolean b , String uid);
     }
 
 
