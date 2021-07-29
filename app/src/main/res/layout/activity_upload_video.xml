@@ -37,6 +37,7 @@
             <VideoView
                 android:id="@+id/upload_video_view"
                 android:layout_width="match_parent"
+                android:layout_centerInParent="true"
                 android:layout_height="450dp" />
 
         </RelativeLayout>

@@ -15,6 +15,7 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.HEAD;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
@@ -41,6 +42,9 @@ public interface ApiInterface {
 
     @POST("profile/be-friend")
     Call<User> sendFriendRequest(@Header("Authorization") String idToken, @Header("friend") String friendId);
+
+    @POST("profile/delete-friend")
+    Call<String> deleteFriendRequest(@Header("Authorization") String idToken, @Header("friend") String friendId);
 
     @POST("profile/accept-friend")
     Call<Object> acceptFriendRequest(@Header("Authorization") String idToken, @Header("friend") String friendId);
@@ -145,5 +149,11 @@ public interface ApiInterface {
                                    @Header("videourl") String videourl,
                                    @Header("desc") String desc ,
                                    @Header("title") String title);
+
+    @POST("get-otp")
+    Call<JsonObject> getOtp( @Body JsonObject jsonObject);
+
+    @POST("otp-verify")
+    Call<JsonObject> verifyOTP( @Body JsonObject jsonObject);
 
 }

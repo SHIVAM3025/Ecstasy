@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.VideoView;
@@ -64,6 +63,27 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
 
     @Override
     public void onBindViewHolder(@NonNull  HomeRecyclerAdapter.PostViewHolder holder, int position) {
+        Video video = postList.get(position);
+
+        holder.artistName.setText(video.getName());
+        holder.videoView.setVideoPath(video.getUrl());
+        holder.videoView.start();
+        holder.postTitle.setText(video.getTitle());
+        holder.postDesc.setText(video.getDesc());
+        holder.postViews.setText(video.getView());
+        switch (video.getVideoStatus()) {
+            case 0:
+                break;
+            case 1:
+                holder.likePost.setImageDrawable(context.getDrawable(R.drawable.ic_liked));
+                break;
+            case 2:
+                holder.dislikePost.setImageDrawable(context.getDrawable(R.drawable.ic_disliked));
+                break;
+        }
+        holder.postLikes.setText(video.getLikes());
+        holder.postDislikes.setText(video.getDislikes());
+        holder.postShares.setText(video.getShares());
 
     }
 
@@ -83,15 +103,13 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
 
     public class PostViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        ImageView artistPhoto;
         VideoView videoView;
         TextView artistName, postTitle, postDesc, postViews, postLikes, postDislikes, postShares;
-        ImageButton sharePost, likePost, dislikePost;
+        ImageButton likePost, dislikePost, sharePost;
         RecyclerView commentRecyclerView;
 
-        public PostViewHolder(@NonNull View itemView){
+        public PostViewHolder(@NonNull View itemView) {
             super(itemView);
-            artistPhoto = itemView.findViewById(R.id.post_artist_photo_view);
             artistName = itemView.findViewById(R.id.post_artist_name_view);
             videoView = itemView.findViewById(R.id.post_video_view);
             postTitle = itemView.findViewById(R.id.post_title_view);
@@ -105,7 +123,7 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
             dislikePost = itemView.findViewById(R.id.post_dislike_btn);
             commentRecyclerView = itemView.findViewById(R.id.comment_recycler_view);
             artistName.setOnClickListener(this);
-            sharePost.setOnClickListener(this);
+            //  sharePost.setOnClickListener(this);
             likePost.setOnClickListener(this);
             dislikePost.setOnClickListener(this);
         }

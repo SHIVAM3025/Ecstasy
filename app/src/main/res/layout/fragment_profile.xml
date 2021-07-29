@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+     android:background="@color/black"
     android:layout_height="match_parent">
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -20,6 +22,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:textColor="@color/white"
             android:id="@+id/profile_name_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -31,6 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="username"
+            android:textColor="@color/white"
             android:layout_gravity="center"
             />
 
@@ -48,6 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Shares"
+            android:textColor="@color/white"
             />
 
         <TextView
@@ -55,6 +60,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="28k"
+            android:textColor="@color/white"
             android:layout_gravity="center"
             />
 
@@ -73,6 +79,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Admirers"
+            android:textColor="@color/white"
             />
 
         <TextView
@@ -80,6 +87,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="28k"
+            android:textColor="@color/white"
             android:layout_gravity="center"
             />
 
@@ -112,6 +120,7 @@
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        tools:listitem="@layout/video_grid_layout"
         android:layout_below="@+id/name_of_the_artist"
         />
 

@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:text="Friend Request"
         android:textSize="20sp"
+        android:textColor="@color/white"
         />
 
     <TextView
@@ -22,6 +23,7 @@
         android:layout_below="@id/heading"
         android:layout_marginTop="10dp"
         android:textSize="18sp"
+        android:textColor="@color/white"
         android:text="You got a new fiend request from Manasvi Sharma"
         />
 
@@ -31,6 +33,7 @@
         android:layout_marginRight="20dp"
         android:text="a moments ago"
         android:layout_width="wrap_content"
+        android:textColor="@color/white"
         android:layout_height="wrap_content"/>
 
     <View

@@ -17,7 +17,9 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -47,7 +49,6 @@ public class HomeFragment extends Fragment implements HomeRecyclerAdapter.OnPost
         return homeFragment;
     }
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,8 +69,8 @@ public class HomeFragment extends Fragment implements HomeRecyclerAdapter.OnPost
         super.onActivityCreated(savedInstanceState);
         context = getContext();
         home_view_recylerView = getView().findViewById(R.id.home_view_recylerView);
-        /*home_view_recylerView.setLayoutManager(new LinearLayoutManager());
-        home_view_recylerView.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);*/
+        home_view_recylerView.setLayoutManager(new LinearLayoutManager(context , LinearLayoutManager.HORIZONTAL , false));
+       // home_view_recylerView.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
         recyclerAdapter = new HomeRecyclerAdapter(context,this);
         home_view_recylerView.setAdapter(recyclerAdapter);
         homeViewModel = new ViewModelProvider((ViewModelStoreOwner) context).get(HomeViewModel.class);

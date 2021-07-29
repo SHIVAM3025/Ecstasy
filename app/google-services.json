@@ -423,11 +423,35 @@
       },
       "oauth_client": [
         {
+          "client_id": "456277723625-4ca17kr4mun208ko7d2uj78emahlv4tl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "in.ecstasy.app",
+            "certificate_hash": "c47c388b437dd2649e20e321faae761fab5fd1c7"
+          }
+        },
+        {
+          "client_id": "456277723625-d2bvte6b8annjq30h4m4vc1i5kq7uv79.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "in.ecstasy.app",
+            "certificate_hash": "bcc5267d6d8caaa3b2e90e765908c2484e2d322d"
+          }
+        },
+        {
           "client_id": "456277723625-ih1vhtlrosh35tt1b0q4j6ur1o395vvq.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "in.ecstasy.app",
             "certificate_hash": "8296bd2b12d0dbff77da6d81f9a1235cd789702b"
+          }
+        },
+        {
+          "client_id": "456277723625-uro1ihs1fm6lp2aaorej404agrn1fbgl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "in.ecstasy.app",
+            "certificate_hash": "ef956b1eefd28cc4124610fd6b3a9adbfba162d9"
           }
         },
         {

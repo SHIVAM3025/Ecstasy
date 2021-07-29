@@ -1,8 +1,10 @@
 package in.ecstasy.app.Profile;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +25,7 @@ public class EditProfileActivity extends AppCompatActivity {
     ApiInterface apiInterface;
     User currentUser;
     TextInputLayout name, username, bio, phone, web;
+    TextView change_number;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,14 +38,29 @@ public class EditProfileActivity extends AppCompatActivity {
         bio = findViewById(R.id.profile_editBio_view);
         phone = findViewById(R.id.profile_editPhone_view);
         web = findViewById(R.id.profile_editWeb_view);
+        change_number = findViewById(R.id.change_number);
         getCurrentUser();
+
+
+        change_number.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(EditProfileActivity.this, OTPActivity.class);
+                intent.putExtra("name", name.getEditText().getText().toString().trim());
+                intent.putExtra("username", username.getEditText().getText().toString().trim());
+                intent.putExtra("about", bio.getEditText().getText().toString().trim());
+                intent.putExtra("phoneNumber", phone.getEditText().getText().toString().trim());
+                startActivity(intent);
+            }
+        });
 
 
     }
 
     private void getCurrentUser() {
-        String idToken = getSharedPreferences("Ecstasy", MODE_PRIVATE).getString("ID_TOKEN",null);
-        /*Call<User> call = apiInterface.getCurrentUserProfile(idToken);
+        String idToken = getSharedPreferences("Ecstasy", MODE_PRIVATE).getString("ID_TOKEN", null);
+        Call<User> call = apiInterface.getCurrentUserProfile(idToken);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
@@ -61,7 +79,7 @@ public class EditProfileActivity extends AppCompatActivity {
             public void onFailure(Call<User> call, Throwable t) {
                 Log.d(TAG, "CurrentUserProfileRequest: " + t.getLocalizedMessage());
             }
-        });*/
+        });
     }
 
     public void handleEditProfile(View view) {
@@ -74,15 +92,15 @@ public class EditProfileActivity extends AppCompatActivity {
             Toast.makeText(this, "Enter Username", Toast.LENGTH_SHORT).show();
             return;
         }
-        if(bio.getEditText().getText().toString().trim().equals("")) {
+        if (bio.getEditText().getText().toString().trim().equals("")) {
             Toast.makeText(this, "Enter bio", Toast.LENGTH_SHORT).show();
             return;
         }
-   /*     if(phone.getEditText().getText().toString().trim().equals("")) {
+        if (phone.getEditText().getText().toString().trim().equals("")) {
             Toast.makeText(this, "Enter phone", Toast.LENGTH_SHORT).show();
             return;
-        }*/
-        if(web.getEditText().getText().toString().trim().equals("")) {
+        }
+        if (web.getEditText().getText().toString().trim().equals("")) {
             Toast.makeText(this, "Enter web address", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -90,7 +108,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 name.getEditText().getText().toString().trim(),
                 username.getEditText().getText().toString().trim(),
                 bio.getEditText().getText().toString().trim(),
-                phone.getEditText().getText().toString().trim(),
+                "+91" + phone.getEditText().getText().toString().trim(),
                 web.getEditText().getText().toString().trim());
 
         call.enqueue(new Callback<Object>() {

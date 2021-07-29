@@ -125,6 +125,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         progressDialog.dismiss();
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container,new HomeFragment()).commit();
         //refreshIdToken();
     }
 

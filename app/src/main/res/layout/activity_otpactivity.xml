@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Profile.OTPActivity"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:boxStrokeWidthFocused="2dp"
+        android:hint="Phone Number"
+        app:startIconDrawable="@drawable/ic_phone"
+        app:startIconTint="@color/black"
+        app:boxStrokeWidth="1dp"
+        android:layout_margin="10dp"
+        android:id="@+id/profile_editPhone_view">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:inputType="phone"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:boxStrokeWidthFocused="2dp"
+        android:hint="OTP"
+        android:visibility="gone"
+        app:startIconDrawable="@drawable/ic_otp"
+        app:startIconTint="@color/black"
+        app:boxStrokeWidth="1dp"
+        android:layout_margin="10dp"
+        android:id="@+id/profile_otpPhone_view">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:inputType="phone"
+            android:layout_height="wrap_content" />
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_profile_btn"
+        android:background="@color/design_default_color_primary"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/white"
+        android:text="Register"
+        android:onClick="handleEditProfile"/>
+
+</LinearLayout>
