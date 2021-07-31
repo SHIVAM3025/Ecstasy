@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.MediaController;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
@@ -91,7 +92,7 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
     public int getItemCount() {
         return postList.size();
     }
-/*    CommentRecyclerAdapter commentRecyclerAdapter;
+   /* CommentRecyclerAdapter commentRecyclerAdapter;
     PostViewHolder viewHolder;*/
 
     public void updatePostList(List<Video>videoList) {
@@ -107,6 +108,7 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
         TextView artistName, postTitle, postDesc, postViews, postLikes, postDislikes, postShares;
         ImageButton likePost, dislikePost, sharePost;
         RecyclerView commentRecyclerView;
+        TextView captionsHeading;
 
         public PostViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -121,9 +123,11 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
             sharePost = itemView.findViewById(R.id.post_share_btn);
             likePost = itemView.findViewById(R.id.post_like_btn);
             dislikePost = itemView.findViewById(R.id.post_dislike_btn);
+            captionsHeading = itemView.findViewById(R.id.captionsHeading);
             commentRecyclerView = itemView.findViewById(R.id.comment_recycler_view);
+            captionsHeading.setOnClickListener(this);
             artistName.setOnClickListener(this);
-            //  sharePost.setOnClickListener(this);
+              sharePost.setOnClickListener(this);
             likePost.setOnClickListener(this);
             dislikePost.setOnClickListener(this);
         }
@@ -145,6 +149,9 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
                 case R.id.post_dislike_btn:
                     listener.OnDislikeClick(getAdapterPosition());
                     break;
+                case R.id.captionsHeading:
+                    listener.OnCaptionsClick( postList.get(getAdapterPosition()).getId(),postList.get(getAdapterPosition()).getVnum() ,getAdapterPosition());
+                    break;
             }
         }
     }
@@ -154,8 +161,8 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
         void OnShareClick(int position);
         void OnLikeClick(int position);
         void OnDislikeClick(int position);
+        void OnCaptionsClick(String id , String vnum , int position);
     }
-
 
     public void handleLikeDislikeView(int integer){
         if(integer == 0){

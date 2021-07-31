@@ -21,15 +21,24 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import in.ecstasy.app.ExploreActivity;
+import in.ecstasy.app.Objects.Comment;
 import in.ecstasy.app.Objects.Video;
 import in.ecstasy.app.R;
+import in.ecstasy.app.Retrofit.ApiClient;
+import in.ecstasy.app.Retrofit.ApiInterface;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
+import static in.ecstasy.app.MainActivity.ID_TOKEN;
 import static in.ecstasy.app.MainActivity.currentUser;
 
 public class HomeFragment extends Fragment implements HomeRecyclerAdapter.OnPostClickListener{
@@ -40,6 +49,10 @@ public class HomeFragment extends Fragment implements HomeRecyclerAdapter.OnPost
     private HomeViewModel homeViewModel;
     private Context context;
     String exploreUserId;
+    BottomSheetDialog bottomSheetDialog;
+    ApiInterface apiInterface;
+
+    private  List<Comment> commentList;
 
     public static HomeFragment newInstance(String exploreUserId) {
         HomeFragment homeFragment = new HomeFragment();
@@ -55,6 +68,7 @@ public class HomeFragment extends Fragment implements HomeRecyclerAdapter.OnPost
         if(getArguments() != null){
             exploreUserId = getArguments().getString("ExploreUserId");
         }
+
     }
 
     @Override
@@ -81,6 +95,8 @@ public class HomeFragment extends Fragment implements HomeRecyclerAdapter.OnPost
                 recyclerAdapter.updatePostList(videoList);
             }
         });
+
+        initBottomSheet();
     }
 
     public void handleNameClick(String id) {
@@ -88,7 +104,7 @@ public class HomeFragment extends Fragment implements HomeRecyclerAdapter.OnPost
         Intent intent = new Intent(context, ExploreActivity.class);
         intent.putExtra("userId", id);
         //intent.putExtra("currentUser", currentUser);
-        startActivity(intent);
+      //  startActivity(intent);
     }
 
 
@@ -147,6 +163,42 @@ public class HomeFragment extends Fragment implements HomeRecyclerAdapter.OnPost
         }else{
             recyclerAdapter.removeDislikeFromVideo(position);
         }
+    }
+
+    @Override
+    public void OnCaptionsClick(String id , String vnum , int position) {
+
+        apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        apiInterface.getVideoComments(ID_TOKEN , id , vnum).enqueue(new Callback<List<Comment>>() {
+            @Override
+            public void onResponse(Call<List<Comment>> call, Response<List<Comment>> response) {
+                if(response.isSuccessful()){
+                    bottomSheetDialog.show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Comment>> call, Throwable t) {
+                Toast.makeText(context, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+    }
+
+    private void initBottomSheet() {
+        commentList = new ArrayList<>();
+        bottomSheetDialog = new BottomSheetDialog(context);
+        bottomSheetDialog.setContentView(R.layout.captions_recycler_view_layout);
+
+        RecyclerView captions_recycler_view =bottomSheetDialog.findViewById(R.id.captions_recyclerView);
+
+        CaptionsRecyclerAdapter captionsRecyclerAdapter = new CaptionsRecyclerAdapter(getContext() , commentList);
+        captions_recycler_view.setLayoutManager(new LinearLayoutManager(context , LinearLayoutManager.VERTICAL , false));
+
+        captions_recycler_view.setAdapter(captionsRecyclerAdapter);
+
     }
 
 }

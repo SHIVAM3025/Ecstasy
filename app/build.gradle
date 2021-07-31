@@ -7,6 +7,21 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
+    signingConfigs {
+        release {
+            storeFile file('C:\\Users\\sunja\\Downloads\\Ecstasy_Android\\Ecstasy\\key.jks')
+            storePassword 'Ecstasy@123'
+            keyAlias 'key0'
+            keyPassword 'Ecstasy@123'
+        }
+        /* release {
+            storeFile file('C:\\Users\\Admin\\Keystores\\KeystoreTelesevak.jks')
+            storePassword 'Rish@vi99'
+            keyAlias 'key0'
+            keyPassword 'Rish@key99'
+        }*/
+    }
+
     defaultConfig {
         applicationId "in.ecstasy.app"
         minSdkVersion 21

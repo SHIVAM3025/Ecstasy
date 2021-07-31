@@ -112,6 +112,7 @@ public class FriendsFragment extends Fragment implements PeopleItemRecyclerViewA
                     for (User user : response.body()) {
                         possibleFriends.add(user);
                     }
+                    Toast.makeText(context, possibleFriends.toString(), Toast.LENGTH_SHORT).show();
                     adapter.updatePeopleList(possibleFriends);
                 }
             }

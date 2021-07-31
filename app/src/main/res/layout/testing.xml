@@ -1,167 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/black"
     android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@drawable/white_outer_boundary_15"
-        android:padding="10dp">
-
-        <TextView
-            android:id="@+id/post_artist_name_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:text="Name of the Artist"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+   <androidx.recyclerview.widget.RecyclerView
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:layout_marginTop="16dp"
+       android:id="@+id/people_recycler_view"
+       android:layout_marginLeft="16dp"
+       android:layout_marginRight="16dp"
+       app:layoutManager="LinearLayoutManager"
+       tools:context=".People.Fragments.AddFriendsFragment"
+       tools:listitem="@layout/item_people_layout"
+       />
 
 
-        <VideoView
-            android:id="@+id/post_video_view"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_below="@+id/post_artist_name_view"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp" />
-
-        <TextView
-            android:id="@+id/post_title_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/post_video_view"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="5dp"
-            android:text="Title"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textFontWeight="20"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/post_desc_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/post_title_view"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="5dp"
-            android:text="Description"
-            android:textAlignment="center"
-            android:textColor="@color/white" />
-
-        <TextView
-            android:id="@+id/post_viewsCount_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/post_desc_view"
-            android:layout_margin="5dp"
-            android:text="3.1 mn"
-            android:textColor="@color/white"
-            android:textStyle="bold" />
-
-
-    </RelativeLayout>
-
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@drawable/white_outer_boundary_15"
-        android:padding="10dp">
-
-        <TextView
-            android:id="@+id/post_artist_share"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="10dp"
-            android:text="Share"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/post_dislike_count_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
-            android:text="87"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
-
-        <ImageButton
-            android:id="@+id/post_dislike_btn"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="20dp"
-            android:layout_toLeftOf="@+id/post_dislike_count_view"
-            android:background="#00000000"
-            android:src="@drawable/ic_dislike" />
-
-        <TextView
-            android:id="@+id/post_like_count_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:text="87"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
-
-        <ImageButton
-            android:id="@+id/post_like_btn"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="20dp"
-            android:layout_toEndOf="@+id/post_like_count_view"
-            android:background="#00000000"
-            android:src="@drawable/ic_like" />
-
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:layout_margin="10dp"
-        android:background="@drawable/white_outer_boundary_15">
-
-        <TextView
-            android:id="@+id/captionsHeading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_margin="5dp"
-            android:text="Captions"
-            android:textAllCaps="true"
-            android:textColor="@color/white" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/comment_recycler_view"
-            android:layout_below="@+id/captionsHeading"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
-    </RelativeLayout>
-
-
-</LinearLayout>
+</RelativeLayout>

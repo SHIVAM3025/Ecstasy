@@ -156,9 +156,12 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 Log.d(TAG, "GetUserProfileInfo: " + response.body());
-                Toast.makeText(MainActivity.this, response.body().toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Connected.", Toast.LENGTH_SHORT).show();
                 if(response.isSuccessful()){
                     currentUser = response.body();
+                    SharedPreferences.Editor editor = getSharedPreferences("Ecstasy", MODE_PRIVATE).edit();
+                    editor.putString("USER_ID",response.body().getId());
+                    editor.commit();
                     if(progressDialog.isShowing()) {
                         progressDialog.dismiss();
                         initialiseHomeFragment();

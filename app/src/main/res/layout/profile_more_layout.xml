@@ -44,6 +44,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="LOGOUT"
+        android:textColor="#FF0000"
         android:id="@+id/profile_logout"
         android:background="#00000000"/>
 
