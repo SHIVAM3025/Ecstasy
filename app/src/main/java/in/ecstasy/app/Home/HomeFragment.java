@@ -51,6 +51,7 @@ public class HomeFragment extends Fragment implements HomeRecyclerAdapter.OnPost
     String exploreUserId;
     BottomSheetDialog bottomSheetDialog;
     ApiInterface apiInterface;
+    CaptionsRecyclerAdapter captionsRecyclerAdapter;
 
     private  List<Comment> commentList;
 
@@ -173,6 +174,9 @@ public class HomeFragment extends Fragment implements HomeRecyclerAdapter.OnPost
             @Override
             public void onResponse(Call<List<Comment>> call, Response<List<Comment>> response) {
                 if(response.isSuccessful()){
+                    commentList.clear();
+                    commentList.addAll(response.body());
+                    captionsRecyclerAdapter.notifyDataSetChanged();
                     bottomSheetDialog.show();
                 }
             }
@@ -183,8 +187,6 @@ public class HomeFragment extends Fragment implements HomeRecyclerAdapter.OnPost
             }
         });
 
-
-
     }
 
     private void initBottomSheet() {
@@ -194,7 +196,7 @@ public class HomeFragment extends Fragment implements HomeRecyclerAdapter.OnPost
 
         RecyclerView captions_recycler_view =bottomSheetDialog.findViewById(R.id.captions_recyclerView);
 
-        CaptionsRecyclerAdapter captionsRecyclerAdapter = new CaptionsRecyclerAdapter(getContext() , commentList);
+         captionsRecyclerAdapter = new CaptionsRecyclerAdapter(getContext() , commentList);
         captions_recycler_view.setLayoutManager(new LinearLayoutManager(context , LinearLayoutManager.VERTICAL , false));
 
         captions_recycler_view.setAdapter(captionsRecyclerAdapter);

@@ -48,7 +48,8 @@ public class CaptionsRecyclerAdapter extends RecyclerView.Adapter<CaptionsRecycl
     public void onBindViewHolder(@NonNull @NotNull ViewHolder holder, int position) {
 
         Comment comment = commentList.get(position);
-        holder.username.setText(comment.getComments());
+        //holder.username.setText(comment.getCommentID());
+        holder.caption.setText(comment.getComments());
         holder.post_dislike_count.setText(comment.getDislikes());
         holder.post_like_count.setText(comment.getLikes());
 

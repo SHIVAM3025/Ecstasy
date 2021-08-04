@@ -37,6 +37,10 @@ public class ProfileRecyclerAdapter extends RecyclerView.Adapter<ProfileRecycler
         notifyDataSetChanged();
     }
 
+    public Video getVideo(int psoition){
+        return videoList.get(psoition);
+    }
+
     @NonNull
     @Override
     public ProfileViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

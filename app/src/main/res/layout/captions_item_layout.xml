@@ -42,15 +42,14 @@
             android:id="@+id/caption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            tools:text="Captions"
-            android:textSize="16sp"
-            android:maxLines="4"
-            android:ellipsize="end"
-            android:textColor="@color/white"
             android:layout_below="@+id/profile_header"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
-            />
+            android:ellipsize="end"
+            android:maxLines="4"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            tools:text="Captions" />
 
         <LinearLayout
             android:layout_width="wrap_content"

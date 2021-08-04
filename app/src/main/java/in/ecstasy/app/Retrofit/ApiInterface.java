@@ -90,13 +90,19 @@ public interface ApiInterface {
     Call<User> getUserFromId(@Header("Authorization") String idToken, @Header("id") String userId);
 
     @POST("profile/video-comments")
-    Call<List<Comment>> getVideoComments(@Header("Authorization") String idToken, @Header("video_owner") String id ,  @Header("video_number") String vnum);
+    Call<List<Comment>> getVideoComments(@Header("Authorization") String idToken,
+                                         @Header("video_owner") String id ,
+                                         @Header("video_number") String vnum);
 
     @POST("profile/watch-video")
     Call<Object> addVideoView(@Header("Authorization") String idToken, @Header("video_owner") String id, @Header("video_number") String vnum);
 
     @POST("profile/share-video")
-    Call<Object> shareVideo(@Header("Authorization") String idToken, @Header("video_owner") String id, @Header("video_number") String vnum, @Header("caption") String caption, @Header("comment_identifier") String commentId);
+    Call<Object> shareVideo(@Header("Authorization") String idToken,
+                            @Header("video_owner") String id,
+                            @Header("video_number") String vnum,
+                            @Header("caption") String caption,
+                            @Header("comment_identifier") String commentId);
 
     @POST("profile/likes-video")
     Call<Object> likesVideo(@Header("Authorization") String idToken, @Header("video_owner") String id, @Header("video_number") String vnum);

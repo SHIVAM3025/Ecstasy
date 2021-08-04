@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:id="@+id/captions_recyclerView"
-    android:layout_margin="10dp"
+    android:background="@color/black"
     xmlns:tools="http://schemas.android.com/tools"
     tools:listitem="@layout/captions_item_layout"
     android:layout_height="match_parent"/>

@@ -1,6 +1,7 @@
 package in.ecstasy.app.Profile;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,9 +14,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -34,6 +37,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import in.ecstasy.app.ExploreActivity;
 import in.ecstasy.app.Objects.Video;
 import in.ecstasy.app.R;
 import in.ecstasy.app.Retrofit.ApiClient;
@@ -268,6 +272,29 @@ public class ProfileFragment extends Fragment implements ProfileRecyclerAdapter.
 
     @Override
     public void OnImageClick(int position) {
-
+        Video video = recyclerAdapter.getVideo(position);
+        Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.video_dialog_layout);
+        ImageView artistImage = dialog.findViewById(R.id.dialog_artist_photo_view);
+        TextView artistName = dialog.findViewById(R.id.dialog_artist_name_view);
+        TextView videoTitle = dialog.findViewById(R.id.dialog_videoTitle);
+        VideoView videoView = dialog.findViewById(R.id.dialog_videoView);
+        Glide.with(context).load(video.getPhoto()).into(artistImage);
+        videoView.setVideoPath(video.getUrl());
+        videoView.start();
+        artistName.setText(video.getName());
+        videoTitle.setText(video.getTitle());
+        artistName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (video.getId() == currentUser.getId()) return;
+                Intent intent = new Intent(context, ExploreActivity.class);
+                intent.putExtra("userId", video.getId());
+                startActivity(intent);
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 }
