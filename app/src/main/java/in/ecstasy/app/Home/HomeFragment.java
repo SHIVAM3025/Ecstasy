@@ -41,6 +41,12 @@ import retrofit2.Response;
 import static in.ecstasy.app.MainActivity.ID_TOKEN;
 import static in.ecstasy.app.MainActivity.currentUser;
 
+/*
+* Home Fragment for developing the home of the application.
+*
+* */
+
+
 public class HomeFragment extends Fragment implements HomeRecyclerAdapter.OnPostClickListener{
 
     private static final String TAG = "HomeFragment";
@@ -140,6 +146,12 @@ public class HomeFragment extends Fragment implements HomeRecyclerAdapter.OnPost
         dialog.show();
     }
 
+    /*
+    *
+    *   Defining the method for invoking onClickListener of like widget in Adapter
+    * */
+
+
     @Override
     public void OnLikeClick(int position) {
         int status = recyclerAdapter.postList.get(position).getVideoStatus();
@@ -152,6 +164,11 @@ public class HomeFragment extends Fragment implements HomeRecyclerAdapter.OnPost
             recyclerAdapter.removeLikeFromVideo(position);
         }
     }
+
+    /*
+     *
+     *   Defining the method for invoking onClickListener of dislike widget in Adapter
+     * */
 
     @Override
     public void OnDislikeClick(int position) {
@@ -166,6 +183,10 @@ public class HomeFragment extends Fragment implements HomeRecyclerAdapter.OnPost
         }
     }
 
+
+    /*
+    * Interface in Captions Recycler Adapter after invoking onClickListener on captions layout
+    * */
     @Override
     public void OnCaptionsClick(String id , String vnum , int position) {
 
@@ -189,6 +210,9 @@ public class HomeFragment extends Fragment implements HomeRecyclerAdapter.OnPost
 
     }
 
+    /*
+    Initializing the Bottom Sheet
+    * */
     private void initBottomSheet() {
         commentList = new ArrayList<>();
         bottomSheetDialog = new BottomSheetDialog(context);

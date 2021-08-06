@@ -23,6 +23,11 @@ import in.ecstasy.app.Retrofit.ApiInterface;
 /**
  * Created By Shivam Gupta on 29-07-2021 of package in.ecstasy.app.Home
  */
+
+/*
+* Captions Recycler Adapter used for getting data from the Apis from server.
+*
+* */
 public class CaptionsRecyclerAdapter extends RecyclerView.Adapter<CaptionsRecyclerAdapter.ViewHolder> {
 
     private final Context context;
