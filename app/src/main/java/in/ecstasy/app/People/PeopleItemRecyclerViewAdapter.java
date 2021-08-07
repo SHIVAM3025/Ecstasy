@@ -1,5 +1,7 @@
 package in.ecstasy.app.People;
 
+import static in.ecstasy.app.MainActivity.currentUser;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,8 +26,6 @@ import in.ecstasy.app.Objects.Friend;
 import in.ecstasy.app.Objects.User;
 import in.ecstasy.app.R;
 
-import static in.ecstasy.app.MainActivity.currentUser;
-
 /**
  * Created By Shivam Gupta on 23-06-2021 of package in.ecstasy.app.People
  */
@@ -37,11 +36,13 @@ public class PeopleItemRecyclerViewAdapter extends RecyclerView.Adapter<PeopleIt
     Context context;
     OnPeopleClick onPeopleClick;
     ViewHolder viewHolder;
+    Boolean state;
 
-    public PeopleItemRecyclerViewAdapter(Context context, OnPeopleClick onPeopleClick) {
+    public PeopleItemRecyclerViewAdapter(Context context, OnPeopleClick onPeopleClick, Boolean state) {
         this.context = context;
         this.onPeopleClick = onPeopleClick;
         peopleList = new ArrayList<>();
+        this.state = state;
     }
 
     public void updatePeopleList(List<User>peopleList) {
@@ -85,8 +86,8 @@ public class PeopleItemRecyclerViewAdapter extends RecyclerView.Adapter<PeopleIt
                 peopleList.get(position).setChecked(true);
                 holder.friendStatus.setChecked(true);
             }
+            }
         }
-    }
 
     @Override
     public int getItemCount() {

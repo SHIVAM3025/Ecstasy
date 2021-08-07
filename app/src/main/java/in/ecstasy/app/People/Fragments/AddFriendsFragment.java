@@ -45,7 +45,7 @@ public class AddFriendsFragment extends Fragment implements PeopleItemRecyclerVi
         context = getContext();
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
         recyclerView = v.findViewById(R.id.people_recycler_view);
-        adapter = new PeopleItemRecyclerViewAdapter(context, (PeopleItemRecyclerViewAdapter.OnPeopleClick) this);
+        adapter = new PeopleItemRecyclerViewAdapter(context, (PeopleItemRecyclerViewAdapter.OnPeopleClick) this , false);
         recyclerView.setAdapter(adapter);
         getContactsList();
         return v;

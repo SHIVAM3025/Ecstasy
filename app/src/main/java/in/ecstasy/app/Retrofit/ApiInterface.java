@@ -57,7 +57,7 @@ public interface ApiInterface {
    // Call<String> possibleFriends(/*@Header("Authorization") String idToken,*/ @Header("phonenumbers") String phoneNumbers);
 
     @POST("profile/edit")
-    Call<Object> editProfile(@Header("Authorization") String idToken, @Header("") String name,
+    Call<Object> editProfile(@Header("Authorization") String idToken, @Header("name") String name,
                              @Header("username") String userName, @Header("bio") String bio,
                              @Header("number") String number, @Header("web") String web);
 

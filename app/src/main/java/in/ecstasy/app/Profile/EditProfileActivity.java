@@ -100,16 +100,16 @@ public class EditProfileActivity extends AppCompatActivity {
             Toast.makeText(this, "Enter phone", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (web.getEditText().getText().toString().trim().equals("")) {
+      /*  if (web.getEditText().getText().toString().trim().equals("")) {
             Toast.makeText(this, "Enter web address", Toast.LENGTH_SHORT).show();
             return;
-        }
+        }*/
         Call<Object> call = apiInterface.editProfile(idToken,
                 name.getEditText().getText().toString().trim(),
                 username.getEditText().getText().toString().trim(),
                 bio.getEditText().getText().toString().trim(),
                 "+91" + phone.getEditText().getText().toString().trim(),
-                web.getEditText().getText().toString().trim());
+                "");
 
         call.enqueue(new Callback<Object>() {
             @Override
