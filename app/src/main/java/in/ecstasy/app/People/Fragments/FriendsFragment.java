@@ -18,7 +18,8 @@ import com.google.gson.JsonObject;
 import java.util.List;
 
 import in.ecstasy.app.Objects.User;
-import in.ecstasy.app.People.PeopleItemRecyclerViewAdapter;
+import in.ecstasy.app.People.OnPeopleClick;
+import in.ecstasy.app.People.PeopleItemFriendsFragmentRecyclerViewAdapter;
 import in.ecstasy.app.R;
 import in.ecstasy.app.Retrofit.ApiClient;
 import in.ecstasy.app.Retrofit.ApiInterface;
@@ -29,11 +30,11 @@ import retrofit2.Response;
 import static android.content.Context.MODE_PRIVATE;
 
 
-public class FriendsFragment extends Fragment implements PeopleItemRecyclerViewAdapter.OnPeopleClick {
+public class FriendsFragment extends Fragment implements OnPeopleClick {
 
     private static final String TAG = "FriendsFragment";
     RecyclerView recyclerView;
-    PeopleItemRecyclerViewAdapter adapter;
+    PeopleItemFriendsFragmentRecyclerViewAdapter adapter;
     Context context;
     ApiInterface apiInterface;
 
@@ -46,7 +47,7 @@ public class FriendsFragment extends Fragment implements PeopleItemRecyclerViewA
         context = getContext();
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
         recyclerView = v.findViewById(R.id.people_recycler_view);
-        adapter = new PeopleItemRecyclerViewAdapter(context, this , true);
+        adapter = new PeopleItemFriendsFragmentRecyclerViewAdapter(context, this , true);
         recyclerView.setAdapter(adapter);
         getContactsList();
         return v;

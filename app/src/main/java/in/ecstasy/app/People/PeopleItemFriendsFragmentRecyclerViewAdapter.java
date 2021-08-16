@@ -29,7 +29,7 @@ import in.ecstasy.app.R;
 /**
  * Created By Shivam Gupta on 23-06-2021 of package in.ecstasy.app.People
  */
-public class PeopleItemRecyclerViewAdapter extends RecyclerView.Adapter<PeopleItemRecyclerViewAdapter.ViewHolder>{
+public class PeopleItemFriendsFragmentRecyclerViewAdapter extends RecyclerView.Adapter<PeopleItemFriendsFragmentRecyclerViewAdapter.ViewHolder>{
 
 
     List<User> peopleList, requestSentPeopleList;
@@ -38,7 +38,7 @@ public class PeopleItemRecyclerViewAdapter extends RecyclerView.Adapter<PeopleIt
     ViewHolder viewHolder;
     Boolean state;
 
-    public PeopleItemRecyclerViewAdapter(Context context, OnPeopleClick onPeopleClick, Boolean state) {
+    public PeopleItemFriendsFragmentRecyclerViewAdapter(Context context, OnPeopleClick onPeopleClick, Boolean state) {
         this.context = context;
         this.onPeopleClick = onPeopleClick;
         peopleList = new ArrayList<>();
@@ -76,7 +76,7 @@ public class PeopleItemRecyclerViewAdapter extends RecyclerView.Adapter<PeopleIt
         if(currentUser.getFriends() != null) {
             for (Map.Entry<String, Friend> entry : currentUser.getFriends().entrySet()) {
                 if (entry.getValue().getId().equals(peopleList.get(position).getId())) {
-                    holder.friendStatus.setVisibility(View.INVISIBLE);
+                    holder.friendStatus.setVisibility(View.VISIBLE);
                 }
             }
         }
@@ -122,11 +122,5 @@ public class PeopleItemRecyclerViewAdapter extends RecyclerView.Adapter<PeopleIt
             onPeopleClick.onSwitchClick(getAdapterPosition() , b , peopleList.get(getAdapterPosition()).getId());
         }
     }
-
-    public interface OnPeopleClick {
-        void onNameClick(int position);
-        void onSwitchClick(int position , Boolean b , String uid);
-    }
-
 
 }
